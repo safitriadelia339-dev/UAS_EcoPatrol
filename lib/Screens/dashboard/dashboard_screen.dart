@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../providers/report_provider.dart';
 import '../../widgets/report_item.dart';
 import 'summary_card.dart';
@@ -26,42 +25,43 @@ class DashboardScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-
             /// 🔹 SUMMARY DI ATAS
-            SummaryCard(
-              total: total,
-              pending: pending,
-              selesai: selesai,
-            ),
+            SummaryCard(total: total, pending: pending, selesai: selesai),
 
             const SizedBox(height: 16),
 
             /// 🔹 LIST LAPORAN (Realtime)
             Expanded(
               child: reports.isEmpty
-                  ? const Center(
-                child: Text("Belum ada laporan"),
-              )
+                  ? const Center(child: Text("Belum ada laporan"))
                   : ListView.builder(
-                itemCount: reports.length,
-                itemBuilder: (context, index) {
-                  final report = reports[index];
+                      itemCount: reports.length,
+                      itemBuilder: (context, index) {
+                        final report = reports[index];
 
-                  return ReportItem(
-                    report: report,
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        "/detail",
-                        arguments: report,
-                      );
-                    },
-                  );
-                },
-              ),
-            )
+                        return ReportItem(
+                          report: report,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/detail",
+                              arguments: report,
+                            );
+                          },
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
+        child: const Icon(Icons.add),
+        tooltip: 'Tambah Laporan',
       ),
     );
   }
