@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
-import '../models/report_model.dart';
-import '../providers/report_provider.dart';
+//import '../models/report_model.dart';
+//import '../providers/report_provider.dart';
 
 class AddReportScreen extends ConsumerStatefulWidget {
   const AddReportScreen({super.key});
@@ -179,7 +179,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
               onPressed: _getLocation,
               icon: const Icon(Icons.location_on),
               label: Text(
-                _latitude == null ? "Tag Lokasi Terkini" : "Lokasi Ditandai ✓",
+                _latitude == null ? "Ambil Lokasi Terkini" : "Lokasi Diambil",
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: _latitude == null ? null : Colors.green,
