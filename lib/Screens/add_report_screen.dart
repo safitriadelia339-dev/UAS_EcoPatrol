@@ -30,7 +30,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
     super.dispose();
   }
 
-  // ===== AMBIL FOTO =====
+  //fungsi ambil foto
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
@@ -42,12 +42,12 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
     }
   }
 
-  // ===== DIALOG PILIH SUMBER FOTO =====
+  //fungsi pilih sumber foto
   void _showImageSourceDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Pilih Sumber Foto"),
+        title: const Text("Pilih Foto"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -73,15 +73,21 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
     );
   }
 
-  // ===== AMBIL LOKASI GPS =====
+  //fungsi ambil lokasi
   Future<void> _getLocation() async {
-    // Cek permission
+    //cek gps aktif/tidak
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _showMessage("GPS tidak aktif, Mohon aktifkan GPS");
+      return;
+    }
+    //cek permission
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
 
-    // Ambil koordinat
+    //ambil koordinat
     Position position = await Geolocator.getCurrentPosition();
     setState(() {
       _latitude = position.latitude;
@@ -89,7 +95,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
     });
   }
 
-  // ===== SIMPAN LAPORAN =====
+  //menyimpan laporan
   void _submitReport() {
     // Validasi
     if (_titleController.text.isEmpty) {
@@ -105,7 +111,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
       return;
     }
 
-    // Buat objek laporan
+    //Buat objek laporan
     final newReport = ReportModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: _titleController.text,
@@ -117,7 +123,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
       createdAt: DateTime.now(),
     );
 
-    // Simpan ke provider
+    //menyimpan ke provider
     ref.read(reportProvider.notifier).addReport(newReport);
 
     // Kembali ke dashboard
@@ -137,7 +143,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // INPUT JUDUL
+            //input jdul
             TextField(
               controller: _titleController,
               decoration: const InputDecoration(
@@ -147,7 +153,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
             ),
             const SizedBox(height: 16),
 
-            // INPUT DESKRIPSI
+            //input desc
             TextField(
               controller: _descController,
               maxLines: 3,
@@ -158,7 +164,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
             ),
             const SizedBox(height: 16),
 
-            // TOMBOL AMBIL FOTO
+            //tombol ambil foto
             ElevatedButton.icon(
               onPressed: _showImageSourceDialog,
               icon: const Icon(Icons.camera_alt),
@@ -166,7 +172,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
             ),
             const SizedBox(height: 16),
 
-            // PREVIEW FOTO
+            //preview foto
             if (_imageFile != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
@@ -174,7 +180,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
               ),
             const SizedBox(height: 16),
 
-            // TOMBOL AMBIL LOKASI
+            //tombol ambil lokasi
             ElevatedButton.icon(
               onPressed: _getLocation,
               icon: const Icon(Icons.location_on),
@@ -186,7 +192,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
               ),
             ),
 
-            // TAMPILKAN KOORDINAT
+            //menampilkan koordinat lokasi
             if (_latitude != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
@@ -199,7 +205,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
               ),
             const SizedBox(height: 24),
 
-            // TOMBOL SIMPAN
+            //kirim laporan
             ElevatedButton(
               onPressed: _submitReport,
               style: ElevatedButton.styleFrom(
@@ -207,7 +213,7 @@ class _AddReportScreenState extends ConsumerState<AddReportScreen> {
                 backgroundColor: Colors.blue,
               ),
               child: const Text(
-                "Simpan Laporan",
+                "Kirim Laporan",
                 style: TextStyle(fontSize: 16),
               ),
             ),
