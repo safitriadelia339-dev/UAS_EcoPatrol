@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
-//import '../models/report_model.dart';
-//import '../providers/report_provider.dart';
+import '../models/report_model.dart';
+import '../providers/report_provider.dart';
 
 class AddReportScreen extends ConsumerStatefulWidget {
   const AddReportScreen({super.key});
@@ -14,6 +14,7 @@ class AddReportScreen extends ConsumerStatefulWidget {
 }
 
 class _AddReportScreenState extends ConsumerState<AddReportScreen> {
+  //menyimpan data sementara
   // Controller untuk input text
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
