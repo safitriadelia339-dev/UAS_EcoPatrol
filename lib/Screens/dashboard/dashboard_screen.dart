@@ -16,10 +16,7 @@ class DashboardScreen extends ConsumerWidget {
     final pending = total - selesai;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("EcoPatrol"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("EcoPatrol"), centerTitle: true),
 
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -65,4 +62,4 @@ class DashboardScreen extends ConsumerWidget {
       ),
     );
   }
-}     
+}

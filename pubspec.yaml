@@ -37,6 +37,9 @@ dependencies:
   flutter_riverpod: ^2.5.1
   image_picker: ^1.2.1
   geolocator: ^14.0.2
+  sqflite:
+  path:
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
