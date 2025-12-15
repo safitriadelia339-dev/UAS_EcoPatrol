@@ -17,7 +17,7 @@ class DashboardScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("EcoPatrol Dashboard"),
+        title: const Text("EcoPatrol"),
         centerTitle: true,
       ),
 
@@ -25,12 +25,12 @@ class DashboardScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            /// 🔹 SUMMARY DI ATAS
+            /// SUMMARY DI ATAS
             SummaryCard(total: total, pending: pending, selesai: selesai),
 
             const SizedBox(height: 16),
 
-            /// 🔹 LIST LAPORAN (Realtime)
+            // LIST LAPORAN (Realtime)
             Expanded(
               child: reports.isEmpty
                   ? const Center(child: Text("Belum ada laporan"))
@@ -65,4 +65,4 @@ class DashboardScreen extends ConsumerWidget {
       ),
     );
   }
-}
+}     
