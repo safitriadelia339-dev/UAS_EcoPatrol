@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../providers/report_provider.dart';
-import '../../widgets/report_item.dart';
+import 'package:uas_themonitor/providers/report_provider.dart';
+import 'package:uas_themonitor/widgets/report_item.dart';
 import 'summary_card.dart';
 
 class DashboardScreen extends ConsumerWidget {

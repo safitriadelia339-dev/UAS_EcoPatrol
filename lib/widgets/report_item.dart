@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/report_model.dart';
+import 'package:uas_themonitor/models/report_model.dart';
 
 class ReportItem extends StatelessWidget {
   final ReportModel report;
