@@ -24,8 +24,19 @@ class ReportNotifier extends StateNotifier<List<ReportModel>> {
     // 2. Perbarui state
     state = [...state, report];
   }
+
+  // --- Method yang ditambahkan: deleteReport ---
+  Future<void> deleteReport(String id) async {
+    // 1. Hapus dari database SQLite
+    // Anda perlu memastikan DbHelper memiliki method deleteReport
+    await _dbHelper.deleteReport(_tableName, id);
+
+    // 2. Perbarui state lokal (hapus dari list)
+    // Kami membuat list baru yang hanya berisi laporan yang ID-nya TIDAK sama dengan ID yang dihapus.
+    state = state.where((report) => report.id != id).toList();
+  }
 }
 
 final reportProvider = StateNotifierProvider<ReportNotifier, List<ReportModel>>(
-  (ref) => ReportNotifier(),
+      (ref) => ReportNotifier(),
 );

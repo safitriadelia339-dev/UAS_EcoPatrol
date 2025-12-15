@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uas_themonitor/providers/report_provider.dart';
 import '../../models/report_model.dart';
 
-
 class DetailReportScreen extends ConsumerWidget {
   final ReportModel report;
 

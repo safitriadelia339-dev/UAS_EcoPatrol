@@ -62,12 +62,23 @@ class DbHelper {
     return db.query(table, orderBy: 'createdAt DESC');
   }
 
+  // --- METHOD YANG DITAMBAHKAN ---
+  Future<int> deleteReport(String table, String id) async {
+    final db = await database;
+    return await db.delete(
+      table,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+  // --------------------------------
+
   // --- Operasi User/Auth ---
 
   Future<Map<String, dynamic>?> authenticateUser(
-    String username,
-    String password,
-  ) async {
+      String username,
+      String password,
+      ) async {
     final db = await database;
     List<Map<String, dynamic>> result = await db.query(
       'users',
