@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../providers/report_provider.dart';
-import '../../widgets/report_item.dart';
+import 'package:uas_themonitor/providers/report_provider.dart';
+import 'package:uas_themonitor/widgets/report_item.dart';
 import 'summary_card.dart';
 
 class DashboardScreen extends ConsumerWidget {
@@ -16,10 +16,7 @@ class DashboardScreen extends ConsumerWidget {
     final pending = total - selesai;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("EcoPatrol"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("EcoPatrol"), centerTitle: true),
 
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -65,4 +62,4 @@ class DashboardScreen extends ConsumerWidget {
       ),
     );
   }
-}     
+}
